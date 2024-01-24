@@ -1,9 +1,8 @@
-#include <iostream>
-
-using namespace std;
+#include "game.h"
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    Game gameObject(10);
+    gameObject.play();
     return 0;
 }
