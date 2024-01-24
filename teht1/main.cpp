@@ -23,13 +23,13 @@ int main()
 
     // Arvotaan satunnainen luku. Korkein arvattava luku on 40.
     korkein_arvattava = 40;
-//    std::srand(1705525730);
+    // std::srand(1705525730);
     std::srand(time(NULL));
 
-//    // Satunnaislukugeneraattorin testausta
-//    for(int i=0;i<40;i++) {
-//        cout << std::rand() % korkein_arvattava << endl;
-//    }
+    //    // Satunnaislukugeneraattorin testausta
+    //    for(int i=0;i<40;i++) {
+    //        cout << std::rand() % korkein_arvattava << endl;
+    //    }
 
     while(true) {
         arvausmaara = game(korkein_arvattava);
