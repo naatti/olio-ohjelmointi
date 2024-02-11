@@ -1,0 +1,184 @@
+// Harj 5, teht 1 alkaa
+// Tee funktio summa, jonka prototyyppi on muotoa int summa(int *, int *).
+// Funktio summa ottaa siis kaksi pointteria input parametreinaan ja palauttaa
+// tuloksena integer luvun.
+// Summan tulee laskea pointtereiden osoittamissa muistipaikoissa
+// olevien muuttujien arvot yhteen ja palauttaa tuo tulos.
+
+int summa(int* luku1, int* luku2) {
+    return *luku1 + *luku2;
+}
+
+//
+// Harj 5, teht 1 loppuu
+// Harj 5, teht 2 alkaa
+// Tee aliohjelma int summa(int &, int &), joka ottaa kaksi referenssiä integer
+// tyyppisiin muuttujiin parametrina.
+// Laskee referenssien avulla niiden integer lukujen summan,
+// joihin referenssit viittaavat.
+// Ja lopulta aliohjelma palauttaa tuon summan kutsujalleen.
+
+int summa(int& luku1, int& luku2) {
+    return luku1 + luku2;
+}
+
+//
+// Harj 5, teht 2 loppuu
+// Harj 5, teht 3 alkaa
+// Kopioi tehtävässä annettu koodi vastaukseksi ja muokkaa main() funktiossa
+// olevia rivejä siten, että kommenteissa kerrottu toiminta tapahtuu.
+// Tarkoituksena on siis tehdä main funktioon koodi, joka luo pointteri
+// muuttujan myClass olioon, alustaa tuon pointteri muuttujan new operaattorin
+// avulla ja käyttää sen jälkeen pointteria olion funktion kutsumiseksi.
+// Ja lopuksi olio vielä tuhotaan tuhoamalla pointteri.
+
+class myClass {
+public:
+    myClass();
+    ~myClass();
+    void memberFunction();
+};
+
+#include <iostream>
+using namespace std;
+
+myClass::myClass() {
+   cout<<"Executing constructor..."<<endl;
+}
+
+myClass::~myClass() {
+   cout<<"Executing destructor..."<<endl;
+}
+
+void myClass::memberFunction() {
+   cout<<"Running member function..."<<endl;
+}
+
+int main() {
+    // tassa tehdään pointteri myClass olioon. Pointteri tulee varatuksi pinosta
+    myClass* olio1;
+    // Tassa sitten asetetaan pointterille arvo eli kaytetaan new operaatiota
+    // olion varaamiseksi keosta eli heapista.
+    olio1 = new myClass;
+    // Ja tassa sitten käytetaan pointteria memberFunktion kutsumiseen
+    olio1->memberFunction();
+    // Ja lopuksi pointteri vapautetaan ja olio tulee samalla tuhotuksi.
+    delete olio1;
+    olio1 = nullptr;
+
+    return 0;
+}
+
+//
+// Harj 5, teht 3 loppuu
+// Harj 5, teht 4 alkaa
+// Kopioi annettu koodi ja lisää Polkupyora luokan konstruktorin ja destruktorin
+// toteutukseen vaadittavat osat.
+
+#include <iostream>
+
+using namespace std;
+
+class ratas {
+public:
+    ratas(string);
+    ~ratas();
+private:
+    string type;
+};
+
+class Polkupyora {
+public:
+    Polkupyora();
+    ~Polkupyora();
+private:
+    ratas* eturatas;
+    ratas* takaratas;
+};
+
+
+ratas::ratas(string s) {
+   cout<<"constructing " << s << endl;
+   type = s;
+}
+
+ratas::~ratas() {
+   cout<<"destructing " << type << endl;
+}
+
+
+Polkupyora::Polkupyora() {
+    // lisää tähän eturatas pointterin alustus
+    eturatas = new ratas("eturatas");
+    // lisää tähän takaratas pointterin alustus;
+    takaratas = new ratas("takaratas");
+}
+
+Polkupyora::~Polkupyora() {
+    // Ja tännekin pitää tulla jotain, jotta pyörän osat tulee tuhottua.
+    delete eturatas;
+    delete takaratas;
+    eturatas = nullptr;
+    takaratas = nullptr;
+}
+
+
+int main() {
+    Polkupyora olio;
+    return 0;
+}
+
+//
+// Harj 5, teht 4 loppuu
+// Harj 5, teht 5 alkaa
+//
+// Mikä tai mitkä seuraavista alla olevasta kuvasta esitetyt väittämät on/ovat oikein?
+
+#include <iostream>
+
+using namspace std;
+
+class myClass
+{
+public:
+	myClass();
+};
+
+myClass::myClass()
+{
+	cout<<"constructor"<<endl;
+}
+
+int main()
+{
+	myClass object;
+	
+	myClass * ptr;
+	
+	ptr = new myClass;
+	
+	delete ptr;
+	return 0;
+}
+
+a. (oikein)
+Koodiesimerkin riveillä 11-14 esitetään myClass luokan toteutus luokan metodeille, joita tässä esimerkissä ei nyt ollut muita kuin tuo konstruktori eli muodostin.
+
+b. (oikein)
+Rivillä 22 new operaattorilla allokoidaan muistia myClass olion vaatima määrä keosta=heap ja new operaattori palauttaa tuon muistialueen alkuosoitteen ptr muuttujaan.
+
+c. (oikein)
+Rivillä 20 luodaan pointterimuuttuja, jonka nimeksi tulee ptr ja tuo pointterimuuttuja osoittaa myClass tyyppiseen olioon.
+
+d. (oikein)
+Koodiesimerkin riveillä 5-9 tapahtuu myClass luokan määrittely. Tämä olisi normaalisti myclass.h nimisessä tiedostossa ja se sisällytetään eli incluudataan normaalisti myclass.cpp tiedostoon, missä esitetään kyseisen luokan toteutus.
+
+e. (oikein)
+Rivillä 18 luodaan olio, jonka nimeksi tulee object. Ja tuo olio luodaan pinosta.
+
+f. (oikein)
+Rivillä 24 delete käsky vapauttaa rivillä 22 keosta=heap varatun muistilohkon ja itseasiassa ennen tuota vapauttamista tulee kutsuttua myClass() olion destructori=tuhoaja funktio. Tässä tapauksessa tuota destructoria ei ole määritelty, joten destructorin suoritus ei tee mitään. 
+
+// Kaikki väittämät ovat oikein.
+//
+// Harj 5 teht 5 päättyy
