@@ -6,7 +6,7 @@
 class Kerros {
 public:
   Kerros();
-  ~Kerros();
+  virtual ~Kerros();
   virtual void maaritaAsunnot();
   virtual double laskeKulutus(double);
 
